@@ -1,9 +1,18 @@
-function getNombre() {
-    return document.getElementById("nombre_usuario").value
+class UserInterface{
+    constructor(){
+
+    }  
+    getNombre(){
+        return document.getElementById("username").value
+    }
+    getSelectedPalabra(){
+        return document.getElementById("palabra").value
+    }
+    getContraseña(){
+        return document.getElementById("password").value
+    }
 }
-function getSelectedPalabra() {
-    return document.getElementById("palabra").value
-}
-function getContraseña() {
-    return document.getElementById("contraseña").value
-}
+
+const ui = new UserInterface();
+
+

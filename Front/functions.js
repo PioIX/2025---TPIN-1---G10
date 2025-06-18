@@ -17,5 +17,12 @@ function existeUsuario(username,password){
 }
 
 function ingresar(){
-    
+    let username = ui.getNombre()
+    let password = ui.getContraseña()
+    let r = existeUsuario(username,password)
+    console.log(r)
+    if (r>0){
+        idLogged = r
+        
+    }
 }
