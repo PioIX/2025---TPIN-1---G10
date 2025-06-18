@@ -71,7 +71,7 @@ app.get('/Jugadores', async function(req, res){
          respuesta = await realizarQuery("SELECT * FROM Jugadores");
      }
      res.status(200).send({
-         message: 'Aca estan los jugadores filtrados por genero o autor',
+         message: 'Aca estan los jugadores',
          animales: respuesta
     });
    } catch (e) {
@@ -80,250 +80,51 @@ app.get('/Jugadores', async function(req, res){
         
    }
 });
-//post animales
-app.post('/Libros', async function(req,res) {
+
+//post jugadores
+app.post('/Jugadores', async function(req,res) {
     console.log(req.body) 
     let respuesta;
-    if (req.body.id != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Libros WHERE id=${req.body.id}`)
+    if (req.body.nombre_usuario != undefined) {
+        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario=${req.body.nombre_usuario}`)
         console.log(respuesta)
         if (respuesta.length != 0) 
-            console.log("Ese libro ya existe")
+            console.log("Ese nombre de usuario ya existe")
         else{
            await realizarQuery(`
-            INSERT INTO Libros (id,nombre,autor,año_de_publicacion,genero,cantidad_de_paginas,breve_decripcion ) VALUES
-            (${req.body.id},"${req.body.nombre}","${req.body.autor}",${req.body.año_de_publicacion},"${req.body.genero}",${req.body.cantidad_de_paginas},"${req.body.breve_descripcion}" );
-        `)
-        res.send("Libro agregado")
-    }
-    } else {
-        res.send("Falta id")
-
-    }    
-
-})
-//get libros 2.0
-app.get('/Libros', async function(req, res){
-    try {
-      let respuesta;
-      if (req.query.año1 != undefined && req.query.año2 != undefined ) {
-          respuesta = await realizarQuery(`SELECT * FROM Libros WHERE año_de_publicacion BETWEEN ${req.query.año1} and ${req.query.año2}`)
-      } else {
-          respuesta = await realizarQuery("SELECT * FROM Libros");
-      }
-      res.status(200).send({
-          message: 'Aca estan los libros filtrados entre '  + req.query.año1 + 'y '  +   req.query.año2 ,
-          libros: respuesta
-     });
-    } catch (e) {
-         console.log(e);
-         res.send("Hubo un error, " + e)
-         
-    }
- });
-
-
-
-
-
-app.get('/Jugadores', async function(req, res){
-    let respuesta;
-    if (req.query.nombre != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre=${req.query.nombre}`)
-    } else {
-        respuesta = await realizarQuery("SELECT * FROM Jugadores");
-    }
-    res.status(200).send(respuesta);
-});
-app.get('/Estadios', async function(req, res){
-    let respuesta;
-    if (req.query.nombre != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Estadios WHERE nombre=${req.query.nombre}`)
-    } else {
-        respuesta = await realizarQuery("SELECT * FROM Estadios");
-    }
-    res.status(200).send(respuesta);
-});
-app.get('/Clubes', async function(req, res){
-    let respuesta;
-    if (req.query.nombre != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Clubes WHERE nombre=${req.query.nombre} `)
-    } else {
-        respuesta = await realizarQuery("SELECT * FROM Clubes");
-    }
-    res.status(200).send(respuesta);
-});
-//post
-app.post('/Clubes', async function(req,res) {
-    console.log(req.body) //Los pedidos post reciben los datos del req.body
-    let respuesta;
-    if (req.body.id != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Clubes WHERE id=${req.body.id}`)
-        console.log(respuesta)
-        if (respuesta.length != 0) 
-            console.log("Ese club ya existe")
-        else{
-          await  realizarQuery(`
-            INSERT INTO Clubes (id,id_estadio,nombre,fecha_inaguracion) VALUES
-            (${req.body.id},${req.body.id_estadio},"${req.body.nombre}","${req.body.fecha_inaguracion}");
-        `)
-        res.send({mensaje: "Club agregado"})
-    }
-    } else {
-        res.send({mensaje:"Falta id"})
-
-    }    
-  
-})
-app.post('/Jugadores', async function(req,res) {
-    console.log(req.body) //Los pedidos post reciben los datos del req.body
-    let respuesta;
-    if (req.body.dni != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE dni=${req.body.dni}`)
-        console.log(respuesta)
-        if (respuesta.length != 0) 
-            console.log("Ese jugador ya existe")
-        else{
-           await realizarQuery(`
-            INSERT INTO Jugadores (dni,nombre,apellido,id_club) VALUES
-            (${req.body.dni},"${req.body.nombre}","${req.body.apellido}",${req.body.id_club});
+            INSERT INTO Jugadores (nombre_usuario ,contraseña , partidas_jugadas, partidas_ganadas, partidas_perdidas, puntos, administrador ) VALUES
+            ("${req.body.nombre_usuario}","${req.body.contraseña}",${req.body.partidas_jugadas},${req.body.partidas_ganadas},${req.body.partidas_perdidas},${req.body.puntos},${req.body.administrador} );
         `)
         res.send("Jugador agregado")
     }
     } else {
-        res.send("Falta dni")
+        res.send("Falta nombre de usuario")
 
     }    
 
 })
 
 
-app.post('/Estadios',async function(req,res) {
-    console.log(req.body) //Los pedidos post reciben los datos del req.body
-    //No poner comilla en las columnas,si en los datos
-    let respuesta;
-    if (req.body.id != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Estadios WHERE id=${req.body.id}`)
-        console.log(respuesta)
-        if (respuesta.length != 0) 
-            console.log("Ese estadio ya existe")
-        else{
-            realizarQuery(` 
-            INSERT INTO Estadios (id,nombre,direccion,capacidad) VALUES
-            (${req.body.id},"${req.body.nombre}","${req.body.direccion}",${req.body.capacidad});
-        `)
-        res.send({res: "Estadio agregado"})
-    }
-} else {
-    res.send("Falta id")
 
-}    
 
-})
-//put
-app.put('/Estadios', async function(req,res) {
-    console.log(req.body)
-    let respuesta;
-    //El if para ver si ya existen va en el post y no en el put
-    if (req.body.id != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Estadios WHERE id=${req.body.id}`)
-        //res.send(respuesta);
-        console.log(respuesta)
-        if (respuesta.length != 0){
-            realizarQuery(`
-                UPDATE Estadios 
-                SET capacidad=${req.body.capacidad}
-                WHERE id=${req.body.id}
-                
-            `)
-            res.send({mensaje: "Estadio actualizado"})
-            }
-            else{
-        res.send({mensaje: "El estadio no existe"})
-        
-        }
-        
-    } else {
-        res.send({mensaje:"Falta id"})
-    }    
-})
 
-app.put('/Jugadores', async function(req,res) {
-    console.log(req.body)
-    let respuesta;
-    if (req.body.dni != undefined){
-        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE dni=${req.body.dni}`)
-        console.log(respuesta)
-        if (respuesta.length != 0){
-            realizarQuery(`
-                UPDATE Jugadores 
-                SET  dni=${req.body.dni}, nombre="${req.body.nombre}", apellido="${req.body.apellido}", id_club=${req.body.id_club});
-                WHERE dni=${req.body.dni}
-           `)    
-            res.send("Jugador actualizado")
-            }
-            else{
-                   
-        res.send("El jugador no existe")
-        }
-        
-        
-    }else {
-        res.send("Falta id ")
-    }
-   
-})
-
-app.put('/Clubes', async function(req,res) {
-    console.log(req.body)
-    let respuesta;
-    if (req.body.dni != undefined){
-        respuesta = await realizarQuery(`SELECT * FROM Clubes WHERE id=${req.body.id}`)
-        console.log(respuesta)
-        if (respuesta.length != 0){
-            realizarQuery(`
-                UPDATE Clubes 
-                SET  id=${req.body.id}, id_estadio=${req.body.id_estadio}, nombre="${req.body.nombre}", fecha_inaguracion=${req.body.fecha_inaguracion});
-                WHERE id=${req.body.id}
-                       
-            `)
-            res.send("Club actualizado")
-            }
-            else{
-        console.log("El club no existe")
-        res.send("El club no existe")
-        }
-        
-        
-    }else {
-        res.send("Falta id")
-    }
-    
-})
-//delete
-app.delete('/Clubes', function(req,res) {
+//delete jugadores y palabras
+app.delete('/Palabras', function(req,res) {
     console.log(req.body)
     realizarQuery(`
-    DELETE FROM Clubes WHERE id=${req.body.id}  
+    DELETE FROM Palabra WHERE palabra=${req.body.palabra}  
     
     `)
-    res.send("Club eliminado")
+    res.send("Palabra eliminado")
 })
+
 app.delete('/Jugadores', function(req,res) {
     console.log(req.body)
     realizarQuery(`
-    DELETE FROM Jugadores WHERE dni=${req.body.dni}  
+    DELETE FROM Jugadores WHERE nombre_usuario=${req.body.nombre_usuario}  
     
     `)
     res.send({mensaje: "Jugador eliminado"})
-})
-app.delete('/Estadios', function(req,res) {
-    console.log(req.body)
-    realizarQuery(`
-    DELETE FROM Estadios WHERE id=${req.body.id}  
-    
-    `)
-    res.send({mensaje: "Estadio eliminado"})
 })
 
 
