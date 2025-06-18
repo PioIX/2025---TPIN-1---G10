@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fdfaf7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.contenedor {
+  text-align: center;
+}
+
+.titulo {
+  width: 100%;
+  max-width: 1200px; /* más grande que antes */
+  margin: 0 auto 40px;
+  display: block;
+}
+
+.boton-jugar {
+  padding: 20px 60px; /* botón más grande */
+  font-size: 24px;     /* texto más grande */
+  font-weight: bold;
+  background-color: #d0ff57;
+  border: 1px solid #000;
+  font-family: "Fredoka", sans-serif;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-jugar:hover {
+  background-color: #b0e645;
+}
+
+.boton {
+  margin-bottom: 30px;
+}
