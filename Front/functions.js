@@ -26,3 +26,10 @@ function ingresar(){
         
     }
 }
+
+function salir(){
+  const confirmar = window.confirm("¿Estás seguro que querés salir?");
+  if (confirmar) {
+    window.close();
+  }
+}

@@ -65,3 +65,6 @@ async function cargarJugador() {
     let respuesta = await result.json();
     console.log(respuesta)
 }
+
+
+
