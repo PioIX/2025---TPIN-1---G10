@@ -81,7 +81,7 @@ app.get('/Jugadores', async function(req, res){
    }
 });
 
-//post jugadores
+//post jugadores: Se puede usar para nel registrar, no para el login
 app.post('/Jugadores', async function(req,res) {
     console.log(req.body) 
     let respuesta;
@@ -98,6 +98,38 @@ app.post('/Jugadores', async function(req,res) {
         res.send("Jugador agregado")
     }
     } else {
+        res.send("Falta nombre de usuario")
+
+    }    
+
+})
+
+//login
+app.post('/Jugadores', async function(req,res) {
+    console.log(req.body) 
+    let respuesta;
+    if (req.body.nombre_usuario != undefined) {
+        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario=${req.body.nombre_usuario}`)
+        console.log(respuesta)
+        if (respuesta.length > 0) {
+            if (req.body.contraseña != undefined) {
+                respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE contraseña=${req.body.contraseña}`)
+                if  (respuesta.length > 0) {
+                    console.log(respuesta)
+                    res.send("Jugador existe")
+                }
+                else{
+                    res.send("Contraseña incorrecta") 
+                }
+            }else{
+                res.send("Falta ingresar contraseña")                
+            }
+        } 
+        else{
+            res.send("Esta mal el nombre de usuario")
+        }
+    
+    }else {
         res.send("Falta nombre de usuario")
 
     }    
