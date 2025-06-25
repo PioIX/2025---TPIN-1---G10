@@ -36,7 +36,7 @@ function registrarNuevo(mail,name,password){
     return users[users.length - 1].id
 }
 
-function ingresar(){
+/*function ingresar(){
     let username = ui.getNombre()
     let password = ui.getContraseña()
     let r = existeUsuario(username,password)
@@ -46,7 +46,7 @@ function ingresar(){
         
         
     }else{
-        if(confirm("Tu usuario aún no existe","Si queres crear tu usuario, toca nuevamente el botón de iniciar sesion")){
+        if(confirm("Tu usuario aún no existe")){
             registrarNuevo(username,password)
         }
     }
@@ -59,4 +59,4 @@ function salir(){
   if (confirmar) {
     window.close();
   }
-}
+}*/

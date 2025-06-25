@@ -50,8 +50,13 @@ async function borrarJugador() {
 async function cargarJugador() {
 
     let data = {
-        nombre: getNombre(),
-        contraseña: getContraseña(),
+        nombre_usuario: ui.getNombre(),
+        contraseña: ui.getContraseña(),
+        partidas_jugadas: 0,
+        partidas_ganadas: 0,
+        partidas_perdidas: 0,
+        puntos: 0,
+        administrador: false
     }
 
     let result = await fetch("http://localhost:4000/Jugadores", {
@@ -71,8 +76,8 @@ async function cargarJugador() {
 async function loginJugador() {
 
     let data = {
-        nombre: getNombre(),
-        contraseña: getContraseña(),
+        nombre_usuario: ui.getNombre(),
+        contraseña: ui.getContraseña(),
     }
 
     let result = await fetch("http://localhost:4000/Login", {
@@ -92,8 +97,8 @@ async function loginJugador() {
     }
     if (respuesta = "Esta mal el nombre de usuario"){
         if(confirm("Su usuario no existe, registrese")){
-            cargarJugador()
-            
+            await cargarJugador()
+            alert("Usuario registrado correctamente")
         }
         
     }
