@@ -105,7 +105,7 @@ app.post('/Jugadores', async function(req,res) {
 })
 
 //login
-app.post('/Jugadores', async function(req,res) {
+app.post('/Login', async function(req,res) {
     console.log(req.body) 
     let respuesta;
     if (req.body.nombre_usuario != undefined) {
@@ -116,21 +116,21 @@ app.post('/Jugadores', async function(req,res) {
                 respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE contraseña=${req.body.contraseña}`)
                 if  (respuesta.length > 0) {
                     console.log(respuesta)
-                    res.send("Jugador existe")
+                    res.send({res:"Jugador existe"})
                 }
                 else{
-                    res.send("Contraseña incorrecta") 
+                    res.send({res:"Contraseña incorrecta"}) 
                 }
             }else{
-                res.send("Falta ingresar contraseña")                
+                res.send({res:"Falta ingresar contraseña"})                
             }
         } 
         else{
-            res.send("Esta mal el nombre de usuario")
+            res.send({res:"Esta mal el nombre de usuario"})
         }
     
     }else {
-        res.send("Falta nombre de usuario")
+        res.send({res:"Falta nombre de usuario"})
 
     }    
 

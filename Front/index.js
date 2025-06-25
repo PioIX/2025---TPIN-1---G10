@@ -68,3 +68,42 @@ async function cargarJugador() {
 
 
 
+async function loginJugador() {
+
+    let data = {
+        nombre: getNombre(),
+        contraseña: getContraseña(),
+    }
+
+    let result = await fetch("http://localhost:4000/Login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    console.log(result)
+    let respuesta = await result.json();
+    if (respuesta.res == "Contraseña incorrecta"){
+        alert("Vuelva a ingresar la contraseña, es incorrecta.")
+    }
+    if (respuesta = "Falta ingresar contraseña"){
+        alert ("Completa el campo de contraseña, por favor.")
+    }
+    if (respuesta = "Esta mal el nombre de usuario"){
+        if(confirm("Su usuario no existe, registrese")){
+            cargarJugador()
+            
+        }
+        
+    }
+    if (respuesta = "Falta nombre de usuario"){
+        alert ("Completa el campo de nombre de usuario, por favor.")
+    }
+    
+        
+    
+    console.log(respuesta)
+}
+
+
