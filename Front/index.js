@@ -89,6 +89,13 @@ async function loginJugador() {
     })
     console.log(result)
     let respuesta = await result.json();
+
+    if (respuesta.loguea == true) {
+        //Aca cambiar de pagina
+    } else {
+        alert(respuesta.res)
+    }
+    /*
     if (respuesta.res == "Contraseña incorrecta"){
         alert("Vuelva a ingresar la contraseña, es incorrecta.")
     }
@@ -105,10 +112,7 @@ async function loginJugador() {
     if (respuesta = "Falta nombre de usuario"){
         alert ("Completa el campo de nombre de usuario, por favor.")
     }
-    
-        
-    
-    console.log(respuesta)
+    */
 }
 
 
