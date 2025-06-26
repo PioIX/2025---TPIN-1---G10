@@ -86,7 +86,7 @@ app.post('/Jugadores', async function(req,res) {
     console.log(req.body) 
     let respuesta;
     if (req.body.nombre_usuario != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario=${req.body.nombre_usuario}`)
+        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario="${req.body.nombre_usuario}"`)
         console.log(respuesta)
         if (respuesta.length != 0) 
             console.log("Ese nombre de usuario ya existe")
@@ -109,28 +109,28 @@ app.post('/Login', async function(req,res) {
     console.log(req.body) 
     let respuesta;
     if (req.body.nombre_usuario != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario=${req.body.nombre_usuario}`)
+        respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario="${req.body.nombre_usuario}"`)
         console.log(respuesta)
         if (respuesta.length > 0) {
             if (req.body.contraseña != undefined) {
-                respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE contraseña=${req.body.contraseña}`)
+                respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE contraseña="${req.body.contraseña}"`)
                 if  (respuesta.length > 0) {
                     console.log(respuesta)
-                    res.send({res:"Jugador existe"})
+                    res.send({res:"Jugador existe",loguea: true})
                 }
                 else{
-                    res.send({res:"Contraseña incorrecta"}) 
+                    res.send({res:"Contraseña incorrecta",loguea:false}) 
                 }
             }else{
-                res.send({res:"Falta ingresar contraseña"})                
+                res.send({res:"Falta ingresar contraseña",loguea:false})                
             }
         } 
         else{
-            res.send({res:"Esta mal el nombre de usuario"})
+            res.send({res:"Esta mal el nombre de usuario",loguea:false})
         }
     
     }else {
-        res.send({res:"Falta nombre de usuario"})
+        res.send({res:"Falta nombre de usuario",loguea:false})
 
     }    
 
