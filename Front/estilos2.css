@@ -1,75 +1,132 @@
-/* Estilo base */
+/* ===== Estilo base ===== */
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #fef7f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: "Montserrat", sans-serif;
-  }
-  
-  /* Contenedor principal */
-  .login-container {
-    text-align: center;
-    padding: 40px 60px; /* Añadido */
-    min-width: 400px;    /* Añadido */
-  }
-  
-  /* Título */
-  .login-container h1 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Formulario */
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .login-form label {
-    text-align: left;
-    margin-left: 10px;
-    font-size: 14px;
-  }
-  
-  .login-form input {
-    padding: 14px;
-    font-size:16px;
-    border: none;
-    border-radius: 20px;
-    background-color: #dedede;
-    width: 350px;
-  }
-  
-  /* Texto de registro */
-  .register-text {
-    margin-top: 15px;
-    font-size: 14px;
-  }
-  
-  /* Botón de registro */
-  .register-button {
-    display: inline-block;
-    margin-top: 5px;
-    padding: 10px 20px;
-    background-color: #d98c29;
-    color: black;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 20px;
-    transition: background-color 0.3s;
-    font-family: "Fredoka", sans-serif;
-  }
-  
-  .register-button:hover {
-    background-color: #c97b1b;
-  }
-  
-  h1{
-    font-family: "Fredoka", sans-serif;
-  }
+  overflow-y: auto;
+   /* en lugar de center */
+  padding-top: 40px;   /* para dejar espacio arriba */
+  height: auto;        /* mejor que 100vh en este caso */
+  min-height: 100vh;   /* asegura altura mínima */
+  margin: 0;
+  background-color: #fef7f0;
+  display: flex;
+  /*align-items: center;*/
+  /*height: 100vh;*/
+  font-family: "Fredoka", sans-serif;
+  margin: 0;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow-y: auto;
+}
+
+
+
+
+
+/* ===== Contenedor principal ===== */
+.login-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 20px #0001;
+  text-align: center;
+  padding: 40px 30px;
+  width: 400px;
+  max-width: 90%;
+  box-sizing: border-box;
+}
+
+/* ===== Pestañas arriba del formulario ===== */
+.tab-bar {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 25px;
+}
+
+.tab-bar button {
+  background: none;
+  border: none;
+  font-family: "Fredoka", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  padding-bottom: 5px;
+  color: black;
+}
+
+.tab-bar .active {
+  border-bottom: 4px solid #d98c29;
+}
+
+/* ===== Secciones de formulario (login / registro) ===== */
+.form-section {
+  display: none;
+}
+
+.form-section.active {
+  display: block;
+}
+
+/* ===== Títulos dentro de cada sección ===== */
+.form-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: "Fredoka", sans-serif;
+}
+
+/* ===== Formularios ===== */
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-form label,
+.register-form label {
+  text-align: left;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.login-form input,
+.register-form input {
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #dedede;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== Botón principal (login y registro) ===== */
+.primary-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #d98c29;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 24px;
+  font-family: "Fredoka", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.primary-button:hover {
+  background-color: #c97b1b;
+}
+
+/* Texto debajo del login */
+.register-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+.register-form .primary-button {
+  width: auto;
+  align-self: center;
+}

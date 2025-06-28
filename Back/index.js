@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(cors());
 
+
+
 app.get('/', function(req, res){
     res.status(200).send({
         message: 'GET Home route working fine!'
