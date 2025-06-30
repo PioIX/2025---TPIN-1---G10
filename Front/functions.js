@@ -51,12 +51,13 @@ function registrarNuevo(mail,name,password){
         }
     }
 }
-
+*/
 
 
 function salir(){
   const confirmar = window.confirm("¿Estás seguro que querés salir?");
   if (confirmar) {
-    window.close();
+   window.location.href = "index.html";
+    
   }
-}*/
+}
