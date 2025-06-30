@@ -93,59 +93,14 @@ async function loginJugador() {
     let respuesta = await result.json();
 
     if (respuesta.loguea == true) {
-        window.location.href = "index3.html";
+        window.location.href = "index4.html";
     } else {
         alert(respuesta.res)
     }
     
 }
 
-  const nombre = ui.getNombre().trim();
-  const contraseña = ui.getContraseña().trim();
-
-  // Filtro rápido: no envío si viene vacío
-  if (!nombre || !contraseña) {
-    alert("Por favor, completá nombre y contraseña.");
-    return;
-  }
-
-  const data = { nombre_usuario: nombre, contraseña };
-
-  try {
-    console.log("🟢 Enviando a /Login:", data);
-
-    const response = await fetch("http://localhost:4000/Login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    console.log("🔵 Status:", response.status);
-
-    // Si no es 2xx, corto acá
-    if (!response.ok) {
-      // Opcional: leer texto/JSON de error
-      const errText = await response.text();
-      console.error("Respuesta no OK:", errText);
-      alert(`Error ${response.status}: ${errText}`);
-      return;
-    }
-
-    // Ahora sí parseo
-    const respuesta = await response.json();
-    console.log("🟣 JSON:", respuesta);
-
-    if (respuesta.loguea === true) {
-      window.location.href = "index3.html";
-    } else {
-      alert(respuesta.res || "Credenciales incorrectas.");
-    }
-  } catch (err) {
-    // Aquí caen errores de red o de .json()
-    console.error("🔥 Error en fetch/login:", err);
-    alert("No se pudo conectar con el servidor.");
-  }
-}*/
+  
 
 
       const loginTab = document.getElementById('btn-login');
