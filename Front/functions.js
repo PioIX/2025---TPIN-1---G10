@@ -61,3 +61,11 @@ function salir(){
     
   }
 }
+
+function verRanking(){
+     window.location.href = "ranking.html";
+    }
+
+function seguirJugando(){
+    window.location.href = "index3.html";
+}

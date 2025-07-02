@@ -1,0 +1,95 @@
+.ranking-title {
+    font-size: 36px;
+    font-weight: bold;
+    
+    font-family: "Fredoka", sans-serif;
+    margin-bottom: 30px;
+  }
+body {
+        margin: 0;
+        padding: 40px 0;
+        min-height: 100vh;
+        background-color: #fef7f0;
+        font-family: "Fredoka", sans-serif;
+        display: flex;
+        justify-content: center;
+     
+      }
+
+  .ranking-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 20px #0001;
+    text-align: center;
+    padding: 40px 30px;
+    width: 60%;
+    max-width: 1000px;
+    min-width: 600px;
+    box-sizing: border-box;
+  }
+
+
+
+  .ranking-list li {
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .ranking-list li:not(.gold):not(.silver):not(.bronze) {
+    background-color: #dedede;
+  }
+  
+  .gold {
+    background-color: #e2d278;
+  }
+  
+  .silver {
+    background-color: #C0C0C0;
+  }
+  
+  .bronze {
+    background-color: #f5bd86;
+  }
+
+  .btnverde,.btnnaranja {
+    display: inline-block;
+    margin: 8px 10px;
+    padding: 14px 28px;
+    border-radius: 24px;
+    font-family: "Fredoka", sans-serif;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+  }
+
+  .btnverde {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .btnvioleta {
+    background-color: #8e44ad;
+    color: white;
+  }
+
+  .btnnaranja {
+    background-color: #d98c29;
+    color: black;
+  }
+
+  .btnverde:hover {
+    background-color: #45a049;
+  }
+
+  .btnvioleta:hover {
+    background-color: #732d91;
+  }
+
+  .btnnaranja:hover {
+    background-color: #c97b1b;
+  }
