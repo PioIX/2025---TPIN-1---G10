@@ -1,10 +1,10 @@
-const users = [];
+/*const users = [];
 users.push(new User("soficracco","0"))
 users.push(new User("agusmombe","0"))
 users.push(new User("chiaranarducci","0"))
 users.push(new User("emadalessandro","0"))
 
-let idLogged = -1
+let idLogged = -1*/
 function existeUsuario(username,password){
     /*
     RECIBO NOMBRE Y CONTRASEÑA (HECHO)

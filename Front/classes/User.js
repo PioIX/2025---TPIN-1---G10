@@ -1,4 +1,4 @@
-let idUsuario = 1;
+/*let idUsuario = 1;
 // Ejercicio 2
 class User{
     constructor(username,password){
@@ -10,3 +10,4 @@ class User{
     }
 }
 
+*/

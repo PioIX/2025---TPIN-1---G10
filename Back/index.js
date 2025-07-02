@@ -74,7 +74,7 @@ app.get('/Jugadores', async function(req, res){
      }
      res.status(200).send({
          message: 'Aca estan los jugadores',
-         animales: respuesta
+         jugadores: respuesta
     });
    } catch (e) {
         console.log(e);
@@ -84,23 +84,23 @@ app.get('/Jugadores', async function(req, res){
 });
 
 //post jugadores: Se puede usar para nel registrar, no para el login
-app.post('/Jugadores', async function(req,res) {
-    console.log(req.body) 
+app.post('/Registro', async function(req,res) {
+    console.log("/registro req.body:"+req.body) 
     let respuesta;
     if (req.body.nombre_usuario != undefined) {
         respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario="${req.body.nombre_usuario}"`)
         console.log(respuesta)
-        if (respuesta.length != 0) 
-            console.log("Ese nombre de usuario ya existe")
+        if (respuesta.length != 0) {
+            res.send({res: "Ese nombre de usuario ya existe", registro:false})}
         else{
            await realizarQuery(`
             INSERT INTO Jugadores (nombre_usuario ,contraseña , partidas_jugadas, partidas_ganadas, partidas_perdidas, puntos, administrador ) VALUES
             ("${req.body.nombre_usuario}","${req.body.contraseña}",${req.body.partidas_jugadas},${req.body.partidas_ganadas},${req.body.partidas_perdidas},${req.body.puntos},${req.body.administrador} );
         `)
-        res.send("Jugador agregado")
+        res.send({res: "Jugador agregado", registro: true})
     }
     } else {
-        res.send("Falta nombre de usuario")
+        res.send({res: "Falta nombre de usuario", registro:false})
 
     }    
 

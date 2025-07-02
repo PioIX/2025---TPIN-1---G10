@@ -48,7 +48,7 @@ async function borrarJugador() {
 }
 //cargar jugador, falta vincular con html y eso
 async function cargarJugador() {
-
+    let id=3
     let data = {
         nombre_usuario: ui.getNombre(),
         contraseña: ui.getContraseña(),
@@ -56,19 +56,27 @@ async function cargarJugador() {
         partidas_ganadas: 0,
         partidas_perdidas: 0,
         puntos: 0,
+        id:id++,
         administrador: false
     }
-
-    let result = await fetch("http://localhost:4000/Jugadores", {
+    console.log("hola")
+    let result = await fetch("http://localhost:4000/Registro", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data)
     })
-    console.log(result)
+
+    console.log("hola2")
     let respuesta = await result.json();
-    console.log(respuesta)
+     if (respuesta.registro == true) {
+        window.location.href = "index4.html";
+    } else {
+        window.alert(respuesta.res);
+
+    }
+    
 }
 
 
