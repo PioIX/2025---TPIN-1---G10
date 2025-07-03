@@ -1,6 +1,8 @@
 //borrar palabra 
 //hacer funcion de selected palabra
 
+
+//para administradores
 async function borrarPalabra() {
     
     let data = {
@@ -23,7 +25,9 @@ async function borrarPalabra() {
         console.log("Hubo un error")
     }
 }
+ 
 
+//para administradores
 async function borrarJugador() {
     
     let data = {
@@ -46,6 +50,28 @@ async function borrarJugador() {
         console.log("Hubo un error")
     }
 }
+
+//para administradores
+async function agregarPalabra() {
+    let data = {
+        palabra: getPalabra(),
+        
+    }
+
+    let result = await fetch("http://localhost:4000/Palabras", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    console.log(result)
+    let respuesta = await result.json();
+    console.log(respuesta)
+}
+
+
+
 //cargar jugador, falta vincular con html y eso
 async function cargarJugador() {
     let id=3
@@ -59,7 +85,7 @@ async function cargarJugador() {
         id:id++,
         administrador: false
     }
-    console.log("hola")
+    
     let result = await fetch("http://localhost:4000/Registro", {
         method: "POST",
         headers: {
@@ -68,7 +94,7 @@ async function cargarJugador() {
         body: JSON.stringify(data)
     })
 
-    console.log("hola2")
+    
     let respuesta = await result.json();
      if (respuesta.registro == true) {
         window.location.href = "index4.html";
@@ -78,6 +104,26 @@ async function cargarJugador() {
     }
     
 }
+
+async function administrador() {
+    
+     let result = await fetch("http://localhost:4000/Administrador?administrador=true", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    console.log(result)
+    let respuesta = await result.json();
+    console.log(respuesta)
+    window.location.href = "admin.html";
+    
+    
+
+}
+
+
 
 
 
@@ -133,4 +179,3 @@ async function loginJugador() {
         loginSection.classList.remove('active');
       });
 
-      
