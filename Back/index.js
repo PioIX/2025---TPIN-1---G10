@@ -26,7 +26,7 @@ app.get('/Palabras', async function(req, res){
      if (req.query.especie != undefined) {
          respuesta = await realizarQuery(`SELECT * FROM Palabras WHERE palabra=${req.query.palabra}`)
      } else {
-         respuesta = await realizarQuery("SELECT * FROM Animales");
+         respuesta = await realizarQuery("SELECT * FROM Palabras");
      }
      res.status(200).send({
          message: 'Aca estan las palabras',
@@ -38,6 +38,32 @@ app.get('/Palabras', async function(req, res){
         
    }
 });
+
+
+//para ver si es admin
+app.get('/Administrador', async function(req, res){
+   try {
+     let respuesta;
+     if (req.query.administrador != undefined) {
+         respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE administrador=${req.query.administrador}`)
+     } else {
+         respuesta = await realizarQuery("SELECT * FROM Jugadores");
+     }
+    
+     res.status(200).send({
+         message: 'Usted es administrador',
+         jugadores: respuesta
+         
+    });
+   } catch (e) {
+        console.log(e);
+        res.send("Hubo un error, " + e)
+        
+   }
+});
+
+
+
 
 //post palabras(admin) 
 app.post('/Palabras', async function(req,res) {
