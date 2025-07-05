@@ -70,6 +70,23 @@ async function agregarPalabra() {
     console.log(respuesta)
 }
 
+async function llenarSelect() {
+    let select = document.getElementById("select").innerHTML;
+    let result = await fetch("http://localhost:4000/Palabras", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+
+    let palabras = await result.json();
+    for (let i = 0; i < palabras.length; i++) {
+        select += `
+            <option value=${palabras[i].palabra}></option>
+        `
+    }
+    document.getElementById("select").innerHTML = select;
+}
 
 
 //cargar jugador, falta vincular con html y eso
