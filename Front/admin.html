@@ -6,9 +6,11 @@
   <title>Administrador</title>
   <link rel="stylesheet" href="admin.css">
 </head>
-<body>
-  <div class="admin-container">
-    <h2>Hola Administrador</h2>
+<body onload="llenarSelect()">
+    <select id="select">
+    </select>
+    <div class="admin-container">
+    <h2>Hola administrador</h2>
 
     <div class="button-group">
       <button type="button" id="btn-borrar-jugador" onclick="borrarJugador()">BORRAR JUGADOR</button>
