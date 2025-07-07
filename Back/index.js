@@ -141,10 +141,10 @@ app.post('/Login', async function(req,res) {
         console.log(respuesta)
         if (respuesta.length > 0) {
             if (req.body.contraseña != undefined) {
-                respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE contraseña="${req.body.contraseña}"`)
+                respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario="${req.body.nombre_usuario}" && contraseña="${req.body.contraseña}"`)
                 if  (respuesta.length > 0) {
                     console.log(respuesta)
-                    res.send({res:"Jugador existe",loguea: true})
+                    res.send({res:"Jugador existe",loguea: true, admin: respuesta[0].administrador})
                 }
                 else{
                     res.send({res:"Contraseña incorrecta",loguea:false}) 

@@ -5,21 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Administrador</title>
   <link rel="stylesheet" href="admin.css">
-</head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet"></head>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
 <body onload="llenarSelect()">
-    <select id="select">
-    </select>
-    <div class="admin-container">
+  <div class="admin-container">
     <h2>Hola administrador</h2>
 
     <div class="button-group">
-      <button type="button" id="btn-borrar-jugador" onclick="borrarJugador()">BORRAR JUGADOR</button>
+      <label for="select">Seleccionar palabra para borrar:</label>
+      <select id="select"></select>
       <button type="button" id="btn-borrar-palabra" onclick="borrarPalabra()">BORRAR PALABRA</button>
+    </div>
+
+    <div class="button-group">
+      <label for="input-palabra">Agregar palabra:</label>
+      <input type="text" id="input-palabra" placeholder="Escribí la palabra" />
       <button type="button" id="btn-agregar-palabra" onclick="agregarPalabra()">AGREGAR PALABRA</button>
+    </div>
+
+    <div class="button-group">
+      <label for="input-nombre-jugador">Nombre del jugador a borrar:</label>
+      <input type="text" id="input-nombre-jugador" placeholder="Nombre del jugador" />
+      <button type="button" id="btn-borrar-jugador" onclick="borrarJugador()">BORRAR JUGADOR</button>
     </div>
   </div>
 
   <script src="index.js"></script>
-  
 </body>
 </html>
