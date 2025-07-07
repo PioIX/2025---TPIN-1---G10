@@ -113,7 +113,7 @@ async function cargarJugador() {
 
     
     let respuesta = await result.json();
-     if (respuesta.registro == true) {
+    if (respuesta.registro == true) {
         window.location.href = "index4.html";
     } else {
         window.alert(respuesta.res);
@@ -164,17 +164,21 @@ async function loginJugador() {
     let respuesta = await result.json();
 
     if (respuesta.loguea == true) {
-        window.location.href = "index4.html";
+        if (respuesta.administrador == true){
+            window.location.href = "admin.html"
+        } else {
+            window.location.href = "index4.html";
+        }
+        
     } else {
         alert(respuesta.res)
     }
-    
 }
 
   
 
 
-      const loginTab = document.getElementById('btn-login');
+     /* const loginTab = document.getElementById('btn-login');
       
       const registerTab = document.getElementById('btn-register');
       const loginSection = document.getElementById('login-section');
@@ -194,5 +198,5 @@ async function loginJugador() {
         loginTab.classList.remove('active');
         registerSection.classList.add('active');
         loginSection.classList.remove('active');
-      });
+      });*/
 
