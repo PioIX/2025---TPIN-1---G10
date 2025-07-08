@@ -1,7 +1,3 @@
-//borrar palabra 
-//hacer funcion de selected palabra
-
-
 //para administradores
 async function borrarPalabra() {
     
@@ -121,7 +117,7 @@ async function cargarJugador() {
     }
     
 }
-
+//no se si hay q usarla o la hice al pedo
 async function administrador() {
     
      let result = await fetch("http://localhost:4000/Administrador?administrador=true", {
@@ -175,28 +171,98 @@ async function loginJugador() {
     }
 }
 
-  
+//funcion del juego en si
 
+let palabra = "";
+let letrasAdivinadas = [];
+let intentos = 6;
 
-     /* const loginTab = document.getElementById('btn-login');
-      
-      const registerTab = document.getElementById('btn-register');
-      const loginSection = document.getElementById('login-section');
-      const registerSection = document.getElementById('register-section');
+window.onload = async function () {
+    await obtenerPalabra();
+};
 
-        loginTab.addEventListener('click', () => {
-        // Activar pestaña y sección de login
-        loginTab.classList.add('active');
-        registerTab.classList.remove('active');
-        loginSection.classList.add('active');
-        registerSection.classList.remove('active');
-      });
+async function obtenerPalabra() {
+    let palabra = "";
+    let letrasAdivinadas = [];
+    let intentos = 6;
 
-      registerTab.addEventListener('click', () => {
-        // Activar pestaña y sección de registro
-        registerTab.classList.add('active');
-        loginTab.classList.remove('active');
-        registerSection.classList.add('active');
-        loginSection.classList.remove('active');
-      });*/
+    window.onload = async function () {
+        await obtenerPalabra();
+    };
 
+    try {
+        let res = await fetch('/PalabraAleatoria');
+        let data = await res.json();
+        palabra = data.palabra.toLowerCase();
+        letrasAdivinadas = Array(palabra.length).fill('_');
+        mostrarGuiones();
+        document.getElementById('intentos').textContent = `Intentos restantes: ${intentos}`;
+    } catch (e) {
+        console.error("Error al obtener la palabra:", e);
+    }
+}
+
+function mostrarGuiones() {
+    document.getElementById('guiones').textContent = letrasAdivinadas.join(' ');
+}
+
+function adivinarLetra() {
+    let letraInput = document.getElementById('LetraInput');
+    let letra = letraInput.value.toLowerCase();
+
+    if (!letra || letra.length !== 1 || !letra.match(/[a-zñ]/)) {
+        alert("Ingresá una sola letra válida");
+        return;
+    }
+
+    if (palabra.includes(letra)) {
+        for (let i = 0; i < palabra.length; i++) {
+            if (palabra[i] === letra) {
+                letrasAdivinadas[i] = letra;
+            }
+        }
+    } else {
+        intentos--;
+    }
+
+    mostrarGuiones();
+    document.getElementById('intentos').textContent = `Intentos restantes: ${intentos}`;
+    letraInput.value = "";
+
+    verificarJuego();
+}
+
+function verificarJuego() {
+    if (!letrasAdivinadas.includes('_')) {
+        window.location.href = "index4.html";
+        desactivarJuego();
+    } else if (intentos === 0) {
+        window.location.href = "index4.html";
+        desactivarJuego();
+    }
+}
+
+function desactivarJuego() {
+    document.getElementById('letra-input').disabled = true;
+}
+
+const loginTab = document.getElementById('btn-login');
+   
+const registerTab = document.getElementById('btn-register');
+const loginSection = document.getElementById('login-section');
+const registerSection = document.getElementById('register-section');
+loginTab.addEventListener('click', () => {
+    // Activar pestaña y sección de login
+    loginTab.classList.add('active');
+    registerTab.classList.remove('active');
+    loginSection.classList.add('active');
+    registerSection.classList.remove('active');
+});
+
+registerTab.addEventListener('click', () => {
+    // Activar pestaña y sección de registro
+    registerTab.classList.add('active');
+    loginTab.classList.remove('active');
+    registerSection.classList.add('active');
+    loginSection.classList.remove('active');
+});

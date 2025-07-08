@@ -23,7 +23,7 @@ app.get('/', function(req, res){
 app.get('/Palabras', async function(req, res){
    try {
      let respuesta;
-     if (req.query.especie != undefined) {
+     if (req.query.palabra != undefined) {
          respuesta = await realizarQuery(`SELECT * FROM Palabras WHERE palabra=${req.query.palabra}`)
      } else {
          respuesta = await realizarQuery("SELECT * FROM Palabras");
@@ -32,6 +32,25 @@ app.get('/Palabras', async function(req, res){
          message: 'Aca estan las palabras',
          palabras: respuesta
     });
+   } catch (e) {
+        console.log(e);
+        res.send("Hubo un error, " + e)
+        
+   }
+});
+
+
+//get palabras aleatorias
+app.get('/PalabrasAleatorias', async function(req, res){
+   try {
+     let respuesta;
+     if (req.query.palabra != undefined) {
+         respuesta =  await realizarQuery(`SELECT palabra FROM Palabras ORDER BY RAND() LIMIT 1`);
+     } else {
+         respuesta = await realizarQuery(`SELECT palabra FROM Palabras ORDER BY RAND() LIMIT 1`);
+     } if (resultado.length > 0) {
+         res.json({ palabra: resultado[0].palabra })
+    }
    } catch (e) {
         console.log(e);
         res.send("Hubo un error, " + e)
