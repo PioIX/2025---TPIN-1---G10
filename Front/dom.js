@@ -11,6 +11,14 @@ class UserInterface{
     getContraseña(){
         return document.getElementById("password").value
     }
+
+    getNombreRegistro(){
+        return document.getElementById("new-username").value
+    }
+
+    getContraseñaRegistro(){
+        return document.getElementById("new-password").value
+    }
 }
 
 const ui = new UserInterface();
