@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,19 +11,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
 </head>
+
 <body>
-  
-    <div class="login-container">
-      <div class="tab-bar">
+
+  <div class="login-container">
+    <div class="tab-bar">
       <button id="btn-login" class="active">Iniciar sesión</button>
       <button id="btn-register">Registrarse</button>
     </div>
+    <div id="login">
     <h1>Inicio de sesión</h1>
-    <!--  --> 
-   <section id="login-section" class="form-section active"></section>
+    <!--  -->
+      <section id="login-section" class="form-section active"></section>
       <form class="login-form">
         <label for="username">Nombre de usuario:</label>
         <input type="text" id="username" name="username" required>
@@ -32,39 +36,41 @@
       </form>
 
       <p class="register-text">¿Todavía no tenes cuenta?</p>
-      
 
-      <!-- <button type="button" onclick="loginJugador()" class="register-button">INICIAR SESIÓN</button> --> 
-        
+
+      <!-- <button type="button" onclick="loginJugador()" class="register-button">INICIAR SESIÓN</button> -->
+      
       <button type="button" onclick="loginJugador()" class="primary-button">INICIAR SESIÓN</button>
     </section>
-  
+    </div>
+
+    <div id="register">
+      <section id="register-section" class="form-section">
+        <h2>Registrarse</h2>
+        <form class="register-form">
+          <label for="new-username">Nombre de usuario:</label>
+          <input type="text" id="new-username" name="new-username" required>
 
 
-    <section id="register-section" class="form-section">
-      <h2>Registrarse</h2>
-      <form class="register-form">
-        <label for="new-username">Nombre de usuario:</label>
-        <input type="text" id="new-username" name="new-username" required>
 
-      
+          <label for="new-password">Contraseña:</label>
+          <input type="password" id="new-password" name="new-password" required>
 
-        <label for="new-password">Contraseña:</label>
-        <input type="password" id="new-password" name="new-password" required>
-
-        <button type="button" class="primary-button" onclick="cargarJugador()">REGISTRARSE</button>
-        
-      </form>
-   </section>
+          <button type="button" class="primary-button" onclick="cargarJugador()">REGISTRARSE</button>
+        </form>
+      </section>
+    </div>
     <script src="dom.js"></script>
-    <!--  <script src="classes/User.js"></script> --> 
+    <!--  <script src="classes/User.js"></script> -->
     <script src="functions.js"></script>
     <script src="index.js"></script>
-  
 
-   
+
+
 </body>
+
 </html>
 
 </body>
+
 </html>

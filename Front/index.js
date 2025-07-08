@@ -50,7 +50,7 @@ async function borrarJugador() {
 //para administradores
 async function agregarPalabra() {
     let data = {
-        palabra: getPalabra(),
+        palabra: getSelectedPalabra(),
         
     }
 
@@ -67,7 +67,8 @@ async function agregarPalabra() {
 }
 
 async function llenarSelect() {
-    let select = document.getElementById("select").innerHTML;
+    let select = document.getElementById("select");
+    select.innerHTML = "";
     let result = await fetch("http://localhost:4000/Palabras", {
         method: "GET",
         headers: {
@@ -76,12 +77,19 @@ async function llenarSelect() {
     })
 
     let palabras = await result.json();
-    for (let i = 0; i < palabras.length; i++) {
+    /*for (let i = 0; i < palabras.length; i++) {
         select += `
             <option value=${palabras[i].palabra}></option>
         `
+    }*/
+
+    for (let i = 0; i < palabras.length; i++) {
+            let option = document.createElement("option");
+            option.value = palabras[i].palabra;
+            option.textContent = palabras[i].palabra;
+            select.appendChild(option);
     }
-    document.getElementById("select").innerHTML = select;
+
 }
 
 
@@ -89,16 +97,10 @@ async function llenarSelect() {
 async function cargarJugador() {
     let id=3
     let data = {
-        nombre_usuario: ui.getNombre(),
-        contraseña: ui.getContraseña(),
-        partidas_jugadas: 0,
-        partidas_ganadas: 0,
-        partidas_perdidas: 0,
-        puntos: 0,
-        id:id++,
-        administrador: false
+        nombre_usuario: ui.getNombreRegistro(),
+        contraseña: ui.getContraseñaRegistro(),
     }
-    
+    console.log(data)
     let result = await fetch("http://localhost:4000/Registro", {
         method: "POST",
         headers: {
@@ -110,7 +112,7 @@ async function cargarJugador() {
     
     let respuesta = await result.json();
     if (respuesta.registro == true) {
-        window.location.href = "index4.html";
+        window.location.href = "index3.html";
     } else {
         window.alert(respuesta.res);
 
@@ -136,10 +138,6 @@ async function administrador() {
 
 }
 
-
-
-
-
 async function loginJugador() {
     const nombre = ui.getNombre();
     const contraseña = ui.getContraseña();
@@ -160,10 +158,10 @@ async function loginJugador() {
     let respuesta = await result.json();
 
     if (respuesta.loguea == true) {
-        if (respuesta.administrador == true){
+        if (respuesta.admin === true){
             window.location.href = "admin.html"
         } else {
-            window.location.href = "index4.html";
+            window.location.href = "index3.html";
         }
         
     } else {
@@ -177,19 +175,7 @@ let palabra = "";
 let letrasAdivinadas = [];
 let intentos = 6;
 
-window.onload = async function () {
-    await obtenerPalabra();
-};
-
 async function obtenerPalabra() {
-    let palabra = "";
-    let letrasAdivinadas = [];
-    let intentos = 6;
-
-    window.onload = async function () {
-        await obtenerPalabra();
-    };
-
     try {
         let res = await fetch('/PalabraAleatoria');
         let data = await res.json();
@@ -257,6 +243,8 @@ loginTab.addEventListener('click', () => {
     registerTab.classList.remove('active');
     loginSection.classList.add('active');
     registerSection.classList.remove('active');
+    document.getElementById("login").style.display = "";
+    document.getElementById("register").style.display = "none";
 });
 
 registerTab.addEventListener('click', () => {
@@ -265,4 +253,7 @@ registerTab.addEventListener('click', () => {
     loginTab.classList.remove('active');
     registerSection.classList.add('active');
     loginSection.classList.remove('active');
+    document.getElementById("login").style.display = "none";
+    document.getElementById("register").style.display = "";
+    
 });

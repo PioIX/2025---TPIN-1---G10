@@ -139,9 +139,8 @@ app.post('/Registro', async function(req,res) {
             res.send({res: "Ese nombre de usuario ya existe", registro:false})}
         else{
            await realizarQuery(`
-            INSERT INTO Jugadores (nombre_usuario ,contraseña , partidas_jugadas, partidas_ganadas, partidas_perdidas, puntos, administrador ) VALUES
-            ("${req.body.nombre_usuario}","${req.body.contraseña}",${req.body.partidas_jugadas},${req.body.partidas_ganadas},${req.body.partidas_perdidas},${req.body.puntos},${req.body.administrador} );
-        `)
+            INSERT INTO Jugadores (nombre_usuario,contraseña) VALUES
+            ('${req.body.nombre_usuario}','${req.body.contraseña}')`)
         res.send({res: "Jugador agregado", registro: true})
     }
     } else {
@@ -163,7 +162,11 @@ app.post('/Login', async function(req,res) {
                 respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario="${req.body.nombre_usuario}" && contraseña="${req.body.contraseña}"`)
                 if  (respuesta.length > 0) {
                     console.log(respuesta)
-                    res.send({res:"Jugador existe",loguea: true, admin: respuesta[0].administrador})
+                    res.send({
+                        res: "Jugador existe",
+                        loguea: true,
+                        admin: Boolean(respuesta[0].administrador)
+})
                 }
                 else{
                     res.send({res:"Contraseña incorrecta",loguea:false}) 
