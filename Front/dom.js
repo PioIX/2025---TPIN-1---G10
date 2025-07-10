@@ -6,7 +6,7 @@ class UserInterface{
         return document.getElementById("username").value
     }
     getSelectedPalabra(){
-        return document.getElementById("palabra").value
+        return document.getElementById("input-palabra").value
     }
     getContraseña(){
         return document.getElementById("password").value

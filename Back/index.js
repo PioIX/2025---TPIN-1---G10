@@ -85,7 +85,7 @@ app.get('/Administrador', async function(req, res){
 
 
 //post palabras(admin) 
-app.post('/Palabras', async function(req,res) {
+app.post('/AgregarPalabras', async function(req,res) {
     console.log(req.body) 
     let respuesta;
     if (req.body.palabra != undefined) {
