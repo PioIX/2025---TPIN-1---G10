@@ -11,25 +11,35 @@
 
   <div class="ranking-container">
     <h2 class="ranking-title">🏆 Top 10 Jugadores 🏆</h2>
-    <ul class="ranking-list">
-      <li class="gold">1° - Mombe - 980 pts</li>
-      <li class="silver">2° - Cracco  - 920 pts</li>
-      <li class="bronze">3° - Kiki - 890 pts</li>
-      <li>4° - Carla Ruiz - 860 pts</li>
-      <li>5° - Pedro López - 840 pts</li>
-      <li>6° - Sofía Torres - 820 pts</li>
-      <li>7° - Diego Martínez - 800 pts</li>
-      <li>8° - Valentina Díaz - 780 pts</li>
-      <li>9° - Tomás Sánchez - 760 pts</li>
-      <li>10° - Lucía Castro - 740 pts</li>
-    </ul>
+   <table id="tabla-ranking" border="1">
+      <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Nombre</th>
+          <th>Puntos</th>
+          <th>Jugadas</th>
+          <th>Ganadas</th>
+          <th>Perdidas</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpo-ranking">
+          <!-- Se va a llenar desde JavaScript -->
+      </tbody>
+    </table>
+
+
+
+
+
+
 
 
     <button class="btnverde" onclick="seguirJugando()">SEGUIR JUGANDO</button>
     <button class="btnnaranja" onclick="salir()">SALIR</button>
   </div>
-  </body>
-  <script src="dom.js"></script>
-  <script src="User.js"></script>
-  <script src="functions.js"></script>
+</body>
+<script src="dom.js"></script>
+<script src="functions.js"></script>
+
+<script src="index.js"></script>
 </html>
