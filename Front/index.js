@@ -27,7 +27,7 @@ async function borrarPalabra() {
 async function borrarJugador() {
     
     let data = {
-        nombre:  document.getElementById("input-palabra").value
+        nombre_usuario:  document.getElementById("input-palabra").value
     }
 
     try {
@@ -174,8 +174,9 @@ let intentos = 6;
 
 async function obtenerPalabra() {
     try {
-        let res = await fetch('/PalabraAleatoria');
+        let res = await fetch('http://localhost:4000/PalabraAleatoria');
         let data = await res.json();
+        console.log(data)
         palabra = data.palabra.toLowerCase();
         letrasAdivinadas = Array(palabra.length).fill('_');
         mostrarGuiones();
@@ -190,7 +191,7 @@ function mostrarGuiones() {
 }
 
 function adivinarLetra() {
-    let letraInput = document.getElementById('LetraInput');
+    let letraInput = document.getElementById('letra-input');
     let letra = letraInput.value.toLowerCase();
 
     if (!letra || letra.length !== 1 || !letra.match(/[a-zñ]/)) {
@@ -248,6 +249,37 @@ async function registrarResultado(resultado, puntos) {
         console.error("Error al registrar estadísticas:", error);
     }
 }
+
+async function cargarRanking() {
+    try {
+        const res = await fetch("http://localhost:4000/Ranking");
+        const data = await res.json();
+        const ranking = data.ranking;
+        const cuerpo = document.getElementById("cuerpo-ranking");
+
+        cuerpo.innerHTML = ""; // Limpiar tabla antes de cargar
+
+        ranking.forEach((jugador, index) => {
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${jugador.nombre_usuario}</td>
+                <td>${jugador.puntos}</td>
+                <td>${jugador.partidas_jugadas}</td>
+                <td>${jugador.partidas_ganadas}</td>
+                <td>${jugador.partidas_perdidas}</td>
+            `;
+            cuerpo.appendChild(fila);
+        });
+    } catch (error) {
+        console.error("Error al cargar el ranking:", error);
+    }
+}
+
+window.onload = cargarRanking;
+
+
+
 
 function desactivarJuego() {
     document.getElementById('letra-input').disabled = true;

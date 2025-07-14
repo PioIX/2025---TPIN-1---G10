@@ -48,8 +48,12 @@ app.get('/PalabraAleatoria', async function(req, res){
          respuesta =  await realizarQuery(`SELECT palabra FROM Palabras ORDER BY RAND() LIMIT 1`);
      } else {
          respuesta = await realizarQuery(`SELECT palabra FROM Palabras ORDER BY RAND() LIMIT 1`);
-     } if (resultado.length > 0) {
-         res.json({ palabra: resultado[0].palabra })
+     } 
+     if (respuesta.length > 0) {
+         res.send({ palabra: respuesta[0].palabra })
+    }
+    else{
+         res.send({ res: "palabra no encontrada" })
     }
    } catch (e) {
         console.log(e);
@@ -79,6 +83,23 @@ app.get('/Administrador', async function(req, res){
         res.send("Hubo un error, " + e)
         
    }
+});
+
+
+//get ranking 
+app.get('/Ranking', async function (req, res) {
+    try {
+        let respuesta = await realizarQuery(`
+            SELECT nombre_usuario, puntos, partidas_jugadas, partidas_ganadas, partidas_perdidas 
+            FROM Jugadores
+            ORDER BY puntos DESC
+            LIMIT 10
+        `);
+        res.json({ ranking: respuesta });
+    } catch (e) {
+        console.log("Error al obtener el ranking:", e);
+        res.status(500).send("Hubo un error: " + e);
+    }
 });
 
 
@@ -226,10 +247,10 @@ app.delete('/BorrarPalabra', async function (req, res) {
     }
 
     try {
-        let respuesta = await realizarQuery("SELECT * FROM Palabras WHERE palabra = ?", [palabra]);
+        let respuesta = await realizarQuery(`SELECT * FROM Palabras WHERE palabra="${req.body.palabra}"`);
 
         if (respuesta.length > 0) {
-            await realizarQuery("DELETE FROM Palabra WHERE palabra = ?", [palabra]);
+            await realizarQuery(`DELETE FROM Palabras WHERE palabra ="${req.body.palabra}"`);
             res.send({ res: "Palabra eliminada", borrada: true });
         } else {
             res.send({ res: "La palabra no existe", borrada: false });
@@ -250,10 +271,10 @@ app.delete('/BorrarJugador', async function (req, res) {
     }
 
     try {
-        let respuesta = await realizarQuery("SELECT * FROM Jugadores WHERE nombre_usuario = ?", [nombre_usuario]);
+        let respuesta = await realizarQuery(`SELECT * FROM Jugadores WHERE nombre_usuario="${req.body.nombre_usuario}"`);
 
         if (respuesta.length > 0) {
-            await realizarQuery("DELETE FROM Jugadores WHERE nombre_usuario = ?", [nombre_usuario]);
+            await realizarQuery(`DELETE FROM Jugadores WHERE nombre_usuario="${req.body.nombre_usuario}"`);
             res.send({ res: "Jugador eliminada", borrada: true });
         } else {
             res.send({ res: "El jugador no existe", borrada: false });
