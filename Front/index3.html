@@ -12,27 +12,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body onload="obtenerPalabra()">
-  <h2>Letras utilizadas: <span id="letras"></span></h2>
+  <h3 id="letras">Letras utilizadas:<span id="letras_utilizadas"></span></h3>
   <div class="jueguito">
     <img src="../Front/images/paracolgarse.png">
-   <!-- <h3>_ _ _ _ _ </h3>-->
+    <h1 id="guiones"></h1>
   </div>
-
-
-  <h1>Juego del Ahorcado</h1>
-  <div id="guiones"></div>
   <input type="text" id="letra-input" maxlength="1" placeholder="Escribí una letra">
-  <button onclick="adivinarLetra()">Adivinar</button>
-  <div id="intentos"></div>
-  <div id="mensaje"></div>
-
-<script src="dom.js"></script>
-<script src="index.js"></script>
-
-<!--  <script src="classes/User.js"></script> -->
-<script src="functions.js"></script>
+  <button class="boton-adivinar"onclick="adivinarLetra()">ADIVINAR</button>
+  <div class="parteDeAbajo">
+    <button onclick="window.location.href='index.html'"class="boton-jugar">VOLVER</button>
+    <h3 id="intentos">Intento restantes:<span id="intentos_restantes"></span></h3>
+  </div>
+  <script src="dom.js"></script>
+  <script src="index.js"></script>
+  <script src="functions.js"></script>
 
 </body>
-<button id="volver">VOLVER</button>
-<h3>Intentos restantes <span id="intentos"></span></h3>
+
 </html>
