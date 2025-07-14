@@ -1,78 +1,44 @@
 body {
-  margin: 0;
-  background-color: #fef6ed;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  
+  font-family: "Montserrat", sans-serif;
+  background-color: #fdfaf7;
   height: 100vh;
+
 }
 
-.juego {
-  text-align: center;
-  position: relative;
+.jueguito {
+   display: flex;
+  align-items: center; /* opcional, para centrar verticalmente */
 }
 
-.poste {
-  width: 5px;
-  height: 150px;
-  background-color: black;
-  margin: 0 auto;
-  position: relative;
+.jueguito img{
+  width:500px;
 }
 
-.poste::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60px;
-  height: 5px;
-  background-color: black;
+#guiones {
+   font-size: 100px;
 }
 
-.letras-usadas {
-  margin-top: 20px;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-
-.letra {
-  display: inline-block;
-  background-color: #e6a741;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  text-align: center;
-  color: white;
+.boton-jugar {
+  padding: 15px 20px; /* botón más grande */
+  font-size: 18px;     /* texto más grande */
   font-weight: bold;
-  font-size: 14px;
-}
-
-.guiones {
-  font-size: 36px;
-  letter-spacing: 15px;
-  margin: 30px 0 20px;
-}
-
-.volver-btn {
-  background-color: #f2693c;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 10px 25px;
-  font-weight: bold;
+  background-color: #d98c29;
+  border: 1px solid #000;
+  font-family: "Fredoka", sans-serif;
+  border-radius: 30px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.intentos {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+.boton-adivinar {
+  padding: 15px 20px; /* botón más grande */
+  font-size: 18px;     /* texto más grande */
   font-weight: bold;
-  padding: 20px;
+  background-color: #d0ff57;
+  border: 1px solid #000;
+  font-family: "Fredoka", sans-serif;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
