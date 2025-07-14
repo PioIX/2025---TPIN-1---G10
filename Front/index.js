@@ -6,7 +6,7 @@ async function borrarPalabra() {
     }
 
     try {
-        let result = await fetch(`http://localhost:4000/Palabras`, {
+        let result = await fetch(`http://localhost:4000/BorrarPalabra`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -66,7 +66,7 @@ async function agregarPalabra() {
     let respuesta = await result.json();
     console.log(respuesta)
 }
-
+/* no lo uso
 async function llenarSelect() {
     let select = document.getElementById("select");
     select.innerHTML = "";
@@ -78,11 +78,7 @@ async function llenarSelect() {
     })
 
     let palabras = await result.json();
-    /*for (let i = 0; i < palabras.length; i++) {
-        select += `
-            <option value=${palabras[i].palabra}></option>
-        `
-    }*/
+   
 
     for (let i = 0; i < palabras.length; i++) {
             let option = document.createElement("option");
@@ -91,10 +87,9 @@ async function llenarSelect() {
             select.appendChild(option);
     }
 
-}
+}*/
 
-
-//cargar jugador, falta vincular con html y eso
+//cargar jugador, registro
 async function cargarJugador() {
     let id=3
     let data = {
@@ -120,7 +115,7 @@ async function cargarJugador() {
     }
     
 }
-//no se si hay q usarla o la hice al pedo
+/*no se si hay q usarla o la hice al pedo, no la uso
 async function administrador() {
     
      let result = await fetch("http://localhost:4000/Administrador?administrador=true", {
@@ -137,8 +132,9 @@ async function administrador() {
     
     
 
-}
+}*/
 
+//login
 async function loginJugador() {
     const nombre = ui.getNombre();
     const contraseña = ui.getContraseña();
@@ -221,11 +217,35 @@ function adivinarLetra() {
 
 function verificarJuego() {
     if (!letrasAdivinadas.includes('_')) {
+        registrarResultado("ganada", palabra.length); 
         window.location.href = "index4.html";
         desactivarJuego();
     } else if (intentos === 0) {
+        registrarResultado("perdida", 0); 
         window.location.href = "index4.html";
         desactivarJuego();
+    }
+}
+
+async function registrarResultado(resultado, puntos) {
+    try {
+        let nombre_usuario = localStorage.getItem("nombre_usuario"); 
+
+        const data = {
+            nombre_usuario,
+            resultado,
+            puntos
+        };
+
+        await fetch("http://localhost:4000/ActualizarEstadisticas", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+    } catch (error) {
+        console.error("Error al registrar estadísticas:", error);
     }
 }
 
