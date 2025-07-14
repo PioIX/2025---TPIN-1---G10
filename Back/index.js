@@ -41,7 +41,7 @@ app.get('/Palabras', async function(req, res){
 
 
 //get palabras aleatorias
-app.get('/PalabrasAleatorias', async function(req, res){
+app.get('/PalabraAleatoria', async function(req, res){
    try {
      let respuesta;
      if (req.query.palabra != undefined) {
@@ -187,28 +187,82 @@ app.post('/Login', async function(req,res) {
 })
 
 
+//funcion para ranking
+app.put('/ActualizarEstadisticas', async function (req, res) {
+    const { nombre_usuario, resultado, puntos } = req.body;
+
+    if (!nombre_usuario || !resultado) {
+        return res.status(400).send({ res: "Faltan datos" });
+    }
+
+    let query = `
+        UPDATE Jugadores 
+        SET 
+            partidas_jugadas = partidas_jugadas + 1,
+            ${resultado === "ganada" ? "partidas_ganadas = partidas_ganadas + 1," : "partidas_perdidas = partidas_perdidas + 1,"}
+            puntos = puntos + ?
+        WHERE nombre_usuario = ?
+    `;
+
+    try {
+        await realizarQuery(query, [puntos, nombre_usuario]);
+        res.send({ res: "Estadísticas actualizadas correctamente" });
+    } catch (e) {
+        console.error("Error al actualizar estadísticas:", e);
+        res.status(500).send({ res: "Error interno" });
+    }
+});
 
 
 
-//delete jugadores y palabras
-app.delete('/Palabras', function(req,res) {
-    console.log(req.body)
-    realizarQuery(`
-    DELETE FROM Palabra WHERE palabra=${req.body.palabra}  
-    
-    `)
-    res.send("Palabra eliminado")
-})
 
-app.delete('/Jugadores', function(req,res) {
-    console.log(req.body)
-    realizarQuery(`
-    DELETE FROM Jugadores WHERE nombre_usuario=${req.body.nombre_usuario}  
-    
-    `)
-    res.send({mensaje: "Jugador eliminado"})
-})
 
+//TIRA ERROR INTERNO, CORREGIR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+app.delete('/BorrarPalabra', async function (req, res) {
+    let palabra = req.body.palabra;
+
+    if (!palabra) {
+        return res.send({ res: "Falta ingresar una palabra", borrada: false });
+    }
+
+    try {
+        let respuesta = await realizarQuery("SELECT * FROM Palabras WHERE palabra = ?", [palabra]);
+
+        if (respuesta.length > 0) {
+            await realizarQuery("DELETE FROM Palabra WHERE palabra = ?", [palabra]);
+            res.send({ res: "Palabra eliminada", borrada: true });
+        } else {
+            res.send({ res: "La palabra no existe", borrada: false });
+        }
+    } catch (error) {
+        console.error("Error al borrar palabra:", error);
+        res.status(500).send({ res: "Error interno", borrada: false });
+    }
+});
+
+
+
+app.delete('/BorrarJugador', async function (req, res) {
+    let nombre_usuario = req.body.nombre_usuario;
+
+    if (!nombre_usuario) {
+        return res.send({ res: "Falta ingresar un jugador", borrada: false });
+    }
+
+    try {
+        let respuesta = await realizarQuery("SELECT * FROM Jugadores WHERE nombre_usuario = ?", [nombre_usuario]);
+
+        if (respuesta.length > 0) {
+            await realizarQuery("DELETE FROM Jugadores WHERE nombre_usuario = ?", [nombre_usuario]);
+            res.send({ res: "Jugador eliminada", borrada: true });
+        } else {
+            res.send({ res: "El jugador no existe", borrada: false });
+        }
+    } catch (error) {
+        console.error("Error al borrar jugador:", error);
+        res.status(500).send({ res: "Error interno", borrada: false });
+    }
+});
 
 
 
