@@ -23,11 +23,11 @@ async function borrarPalabra() {
 }
  
 
-//para administradores
+//para administradores. NO ANDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 async function borrarJugador() {
     
     let data = {
-        nombre_usuario:  document.getElementById("input-palabra").value
+        nombre_usuario:  document.getElementById("input-nombre-jugador").value
     }
 
     try {
@@ -48,9 +48,9 @@ async function borrarJugador() {
 }
 
 //para administradores
-async function agregarPalabra() {
+async function AgregarPalabras() {
     let data = {
-        palabra: document.getElementById("input-palabra").value
+        palabra: document.getElementById("input-palabra-agregar").value
 
         
     }
@@ -223,7 +223,7 @@ function verificarJuego() {
         desactivarJuego();
     } else if (intentos === 0) {
         registrarResultado("perdida", 0); 
-        window.location.href = "index4.html";
+        window.location.href = "index5.html";
         desactivarJuego();
     }
 }
@@ -257,8 +257,7 @@ async function cargarRanking() {
         const ranking = data.ranking;
         const cuerpo = document.getElementById("cuerpo-ranking");
 
-        cuerpo.innerHTML = ""; // Limpiar tabla antes de cargar
-
+        cuerpo.innerHTML = ""; 
         ranking.forEach((jugador, index) => {
             const fila = document.createElement("tr");
             fila.innerHTML = `
