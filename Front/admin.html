@@ -22,8 +22,8 @@
 
     <div class="button-group">
       <label for="input-palabra">Agregar palabra:</label>
-      <input type="text" id="input-palabra" placeholder="Escribí la palabra" />
-      <button type="button" id="btn-agregar-palabra" onclick="agregarPalabra()">AGREGAR PALABRA</button>
+      <input type="text" id="input-palabra-agregar" placeholder="Escribí la palabra" />
+      <button type="button" id="btn-agregar-palabra" onclick="AgregarPalabras()">AGREGAR PALABRA</button>
     </div>
 
     <div class="button-group">
@@ -31,6 +31,9 @@
       <input type="text" id="input-nombre-jugador" placeholder="Nombre del jugador" />
       <button type="button" id="btn-borrar-jugador" onclick="borrarJugador()">BORRAR JUGADOR</button>
     </div>
+    
+    <button onclick="window.location.href='index3.html'"class="boton-jugar">JUGAR</button>
+    <button onclick="window.location.href='ranking.html'"class="boton-ranking">VER RANKING</button>
   </div>
 
   <script src="dom.js"></script>

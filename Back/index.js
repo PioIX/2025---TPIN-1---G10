@@ -24,7 +24,7 @@ app.get('/Palabras', async function(req, res){
    try {
      let respuesta;
      if (req.query.palabra != undefined) {
-         respuesta = await realizarQuery(`SELECT * FROM Palabras WHERE palabra=${req.query.palabra}`)
+         respuesta = await realizarQuery(`SELECT * FROM Palabras WHERE palabra='${req.query.palabra}'`)
      } else {
          respuesta = await realizarQuery("SELECT * FROM Palabras");
      }
@@ -53,7 +53,7 @@ app.get('/PalabraAleatoria', async function(req, res){
          res.send({ palabra: respuesta[0].palabra })
     }
     else{
-         res.send({ res: "palabra no encontrada" })
+         res.send({ res: "Palabra no encontrada" })
     }
    } catch (e) {
         console.log(e);
@@ -110,7 +110,7 @@ app.post('/AgregarPalabras', async function(req,res) {
     console.log(req.body) 
     let respuesta;
     if (req.body.palabra != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Palabras WHERE palabra=${req.body.palabra}`)
+        respuesta = await realizarQuery(`SELECT * FROM Palabras WHERE palabra='${req.body.palabra}'`)
         console.log(respuesta)
         if (respuesta.length != 0) 
             console.log("Esa palabra ya existe")
@@ -119,10 +119,10 @@ app.post('/AgregarPalabras', async function(req,res) {
             INSERT INTO Palabras (palabra) VALUES
             ("${req.body.palabra}");
         `)
-        res.send("Palabra agregada")
+        res.send({res: "Palabra agregada", agregado: true})
     }
     } else {
-        res.send("Falta ingresar palabra")
+        res.send({res: "Falta palabra", agregado:false})
 
     }    
 
@@ -275,7 +275,7 @@ app.delete('/BorrarJugador', async function (req, res) {
 
         if (respuesta.length > 0) {
             await realizarQuery(`DELETE FROM Jugadores WHERE nombre_usuario="${req.body.nombre_usuario}"`);
-            res.send({ res: "Jugador eliminada", borrada: true });
+            res.send({ res: "Jugador eliminado", borrada: true });
         } else {
             res.send({ res: "El jugador no existe", borrada: false });
         }
