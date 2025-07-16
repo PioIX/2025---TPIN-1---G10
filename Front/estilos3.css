@@ -11,6 +11,8 @@ body {
   align-items: center; /* opcional, para centrar verticalmente */
 }
 
+
+
 .jueguito img{
   width:500px;
 }
@@ -41,4 +43,21 @@ body {
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+.letra {
+  display: inline-block;
+  background-color: #e6a741;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+.intentos {
+position: absolute;
+right: 0;
+bottom: 0;
 }
