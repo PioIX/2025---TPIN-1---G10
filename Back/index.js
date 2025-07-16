@@ -211,22 +211,26 @@ app.post('/Login', async function(req,res) {
 //funcion para ranking
 app.put('/ActualizarEstadisticas', async function (req, res) {
     const { nombre_usuario, resultado, puntos } = req.body;
-
+    console.log("Me llego: ")
+    console.log(req.body)
     if (!nombre_usuario || !resultado) {
         return res.status(400).send({ res: "Faltan datos" });
     }
-
-    let query = `
-        UPDATE Jugadores 
-        SET 
-            partidas_jugadas = partidas_jugadas + 1,
-            ${resultado === "ganada" ? "partidas_ganadas = partidas_ganadas + 1," : "partidas_perdidas = partidas_perdidas + 1,"}
-            puntos = puntos + ?
-        WHERE nombre_usuario = ?
-    `;
-
     try {
-        await realizarQuery(query, [puntos, nombre_usuario]);
+        let query = ""
+        if (resultado == "ganada") {
+            let datos = await realizarQuery(`SELECT partidas_ganadas, partidas_jugadas, puntos FROM Jugadores WHERE nombre_usuario = "${nombre_usuario}"`)
+            let {partidas_ganadas , partidas_jugadas } = datos[0]
+            console.log({partidas_ganadas , partidas_jugadas})
+            query = `UPDATE Jugadores SET partidas_jugadas = ${partidas_jugadas + 1}, partidas_ganadas = ${partidas_ganadas + 1}, puntos = ${puntos + datos[0].puntos} WHERE nombre_usuario = "${nombre_usuario}"`;
+        } else {
+            let datos = await realizarQuery(`SELECT partidas_perdidas, partidas_jugadas, puntos FROM Jugadores WHERE nombre_usuario = "${nombre_usuario}"`)
+            let {partidas_jugadas , partidas_perdidas } = datos[0]
+            console.log({partidas_jugadas , partidas_perdidas})
+            query = `UPDATE Jugadores SET partidas_jugadas = ${partidas_jugadas + 1}, partidas_perdidas = ${partidas_perdidas + 1}, puntos = ${puntos + datos[0].puntos} WHERE nombre_usuario = "${nombre_usuario}"`;
+        }
+        
+        await realizarQuery(query);
         res.send({ res: "Estadísticas actualizadas correctamente" });
     } catch (e) {
         console.error("Error al actualizar estadísticas:", e);
@@ -236,9 +240,6 @@ app.put('/ActualizarEstadisticas', async function (req, res) {
 
 
 
-
-
-//TIRA ERROR INTERNO, CORREGIR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 app.delete('/BorrarPalabra', async function (req, res) {
     let palabra = req.body.palabra;
 

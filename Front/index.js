@@ -31,7 +31,7 @@ async function borrarJugador() {
     }
 
     try {
-        let result = await fetch(`http://localhost:4000/Jugadores`, {
+        let result = await fetch(`http://localhost:4000/BorrarJugador`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -108,6 +108,7 @@ async function cargarJugador() {
     
     let respuesta = await result.json();
     if (respuesta.registro == true) {
+        localStorage.setItem("nombre_usuario",ui.getNombreRegistro()); 
         window.location.href = "index3.html";
     } else {
         window.alert(respuesta.res);
@@ -115,24 +116,7 @@ async function cargarJugador() {
     }
     
 }
-/*no se si hay q usarla o la hice al pedo, no la uso
-async function administrador() {
-    
-     let result = await fetch("http://localhost:4000/Administrador?administrador=true", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    })
-    console.log(result)
-    let respuesta = await result.json();
-    console.log(respuesta)
-    window.location.href = "admin.html";
-    
-    
 
-}*/
 
 //login
 async function loginJugador() {
@@ -155,6 +139,7 @@ async function loginJugador() {
     let respuesta = await result.json();
 
     if (respuesta.loguea == true) {
+        localStorage.setItem("nombre_usuario",nombre); 
         if (respuesta.admin === true){
             window.location.href = "admin.html"
         } else {
@@ -190,19 +175,36 @@ function mostrarGuiones() {
     document.getElementById('guiones').textContent = letrasAdivinadas.join(' ');
 }
 
+let letrasUsadas = [];
+
 function adivinarLetra() {
     let letraInput = document.getElementById('letra-input');
     let letra = letraInput.value.toLowerCase();
 
-    if (!letra || letra.length !== 1 || !letra.match(/[a-zñ]/)) {
+    if (!letra || letra.length !== 1 || !letra.match(/[a-zñ]/i)) {
         alert("Ingresá una sola letra válida");
         return;
     }
+    if (letrasUsadas.includes(letra)) {
+      alert("Ya usaste esa letra");
+      return;
+    }
 
-    if (palabra.includes(letra)) {
+    letrasUsadas.push(letra);
+    document.getElementById("letras_utilizadas").textContent = letrasUsadas.join(", ");
+
+
+    function quitarTildes(cadena) {
+        return cadena.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    let letraSinTilde = quitarTildes(letra);
+    let palabraSinTildes = quitarTildes(palabra.toLowerCase());
+
+    if (palabraSinTildes.includes(letraSinTilde)) {
         for (let i = 0; i < palabra.length; i++) {
-            if (palabra[i] === letra) {
-                letrasAdivinadas[i] = letra;
+            if (quitarTildes(palabra[i].toLowerCase()) === letraSinTilde) {
+                letrasAdivinadas[i] = palabra[i]; 
             }
         }
     } else {
@@ -216,13 +218,18 @@ function adivinarLetra() {
     verificarJuego();
 }
 
-function verificarJuego() {
+
+
+
+
+async function verificarJuego() {
     if (!letrasAdivinadas.includes('_')) {
-        registrarResultado("ganada", palabra.length); 
+        await registrarResultado("ganada", palabra.length); 
         window.location.href = "index4.html";
+        
         desactivarJuego();
     } else if (intentos === 0) {
-        registrarResultado("perdida", 0); 
+        await registrarResultado("perdida", 0); 
         window.location.href = "index5.html";
         desactivarJuego();
     }
@@ -238,13 +245,15 @@ async function registrarResultado(resultado, puntos) {
             puntos
         };
 
-        await fetch("http://localhost:4000/ActualizarEstadisticas", {
+        let res = await fetch("http://localhost:4000/ActualizarEstadisticas", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         });
+        let response = await res.json()
+        console.log(response)
     } catch (error) {
         console.error("Error al registrar estadísticas:", error);
     }
@@ -274,8 +283,6 @@ async function cargarRanking() {
         console.error("Error al cargar el ranking:", error);
     }
 }
-
-window.onload = cargarRanking;
 
 
 
