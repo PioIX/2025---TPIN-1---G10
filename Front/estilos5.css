@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #fdf5ef;
+  background-color: #fef7f0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +33,7 @@ p {
     display: inline-block;
     margin-top: 5px;
     padding: 10px 20px;
-    background-color: #abc270;
+    background-color:#d0ff57;
     color: black;
     font-weight: bold;
     text-decoration: none;

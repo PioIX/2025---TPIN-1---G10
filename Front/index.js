@@ -175,6 +175,12 @@ function mostrarGuiones() {
     document.getElementById('guiones').textContent = letrasAdivinadas.join(' ');
 }
 
+function actualizarImagenAhorcado() {
+    const img = document.getElementById("imagen-ahorcado");
+    let imagenIndex = 6 - intentos; // Si quedan 5 intentos → imagen 1
+    img.src = `images/ahorcado${imagenIndex}.png`;
+}  
+
 let letrasUsadas = [];
 
 function adivinarLetra() {
@@ -208,7 +214,9 @@ function adivinarLetra() {
             }
         }
     } else {
+        actualizarImagenAhorcado();
         intentos--;
+       
     }
 
     mostrarGuiones();
