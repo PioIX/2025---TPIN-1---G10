@@ -10,6 +10,15 @@ body {
   box-sizing: border-box;
 }
 
+/* Letras usadas arriba a la izquierda */
+#letras_utilizadas {
+  align-self: flex-start;
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 10px;
+  text-align: left;
+  padding-right: 1000px ;}
+
 h3, h1 {
   font-family: "Fredoka", sans-serif;
   text-align: center;
@@ -22,6 +31,7 @@ h3, h1 {
   margin-bottom: 20px;
 }
 
+
 .jueguito {
   display: flex;
   align-items: center;
@@ -32,28 +42,32 @@ h3, h1 {
 }
 
 .jueguito img {
-  width: 300px;
+  width: 400px;
   max-width: 90%;
+  padding-right: 100px;
 }
 
 #guiones {
   font-size: 60px;
   letter-spacing: 10px;
   color: #333;
+  padding-right: 100px;
 }
 
 input#letra-input {
-  padding: 10px;
-  font-size: 18px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
+  padding: 14px;
+  font-size:30px;
+  border: none;
+  border-radius: 20px;
+  background-color: #dedede;
+  width:30%;
+  box-sizing: border-box;
   text-align: center;
-  margin-bottom: 15px;
-  width: 60px;
+  font-family: "Montserrat", sans-serif;
 }
 
-.boton-adivinar,
-.boton-jugar {
+/* Botones */
+.boton-adivinar, .boton-jugar, .boton-volver {
   padding: 12px 25px;
   font-size: 18px;
   font-weight: bold;
@@ -61,13 +75,14 @@ input#letra-input {
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  margin: 10px 10px 0 10px;
   transition: all 0.3s ease;
 }
 
 .boton-adivinar {
   background-color: #a2e64b;
   color: #000;
+  margin: 20px;
+  width: 30%;
 }
 
 .boton-adivinar:hover {
@@ -81,6 +96,15 @@ input#letra-input {
 
 .boton-jugar:hover {
   background-color: #e39a2e;
+}
+
+.boton-volver {
+  background-color: #ccc;
+  color: #000;
+}
+
+.boton-volver:hover {
+  background-color: #bbb;
 }
 
 .letra {
@@ -97,15 +121,29 @@ input#letra-input {
   margin: 3px;
 }
 
+/* Contenedor abajo para botones, input e intentos */
 .parteDeAbajo {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 5px;
-  margin-top: 20px;
+  width: 100%;
+  margin-top: auto; /* para pegar abajo */
+  gap: 10px;
 }
 
-#intentos, #mensaje {
+/* Contenedor de botones e input a la izquierda */
+.parteDeAbajo .botones {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+}
+
+/* Intentos restantes a la derecha */
+.parteDeAbajo #intentos {
+  text-align: right;
+  flex: 1;
   font-size: 18px;
   color: #444;
 }
