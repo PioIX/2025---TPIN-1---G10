@@ -7,6 +7,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-size: 16px;
 }
 
 .admin-container {
@@ -32,8 +33,10 @@ body {
   gap: 15px;
 }
 
+
 .button-group button {
   padding: 10px 20px;
+  font-size: 15px;
   background-color: #d27b15;
   border: none;
   border-radius: 25px;
@@ -41,8 +44,73 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  font-family: "Fredoka", sans-serif;
+  margin-bottom: 20px;
 }
 
 .button-group button:hover {
   background-color: #a75f0d;
+}
+
+.boton-jugar{
+  padding: 10px 20px; /* botón más grande */
+  font-size: 15px; 
+  font-weight: bold;
+  background-color: #d0ff57;
+  border: none;
+  font-family: "Fredoka", sans-serif;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 12px;
+  margin-right: 5px;
+}
+
+.boton-ranking{
+  padding: 10px 20px; /* botón más grande */
+  font-size: 15px; 
+  font-weight: bold;
+  border: none;
+  margin-top: 10px;
+  background-color:  #e26ce2;
+  font-family: "Fredoka", sans-serif;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#input-palabra{
+  padding: 10px;
+  font-size: 13px;
+  border: none;
+  border-radius: 20px;
+  background-color: #dedede;
+  width: 100%;
+  box-sizing: border-box;
+  font-family:  "Montserrat", sans-serif;;
+}
+#input-palabra-agregar{
+  padding: 10px;
+  font-size: 13px;
+  border: none;
+  border-radius: 20px;
+  background-color: #dedede;
+  width: 100%;
+  box-sizing: border-box;
+  font-family:  "Montserrat", sans-serif;;
+}
+#input-nombre-jugador{
+  padding: 10px;
+  font-size: 13px;
+  border: none;
+  border-radius: 20px;
+  background-color: #dedede;
+  width: 100%;
+  box-sizing: border-box;
+  font-family:  "Montserrat", sans-serif;
+}
+
+.label{
+  font-family:  "Montserrat", sans-serif;
+  font-size: 10px;
 }
